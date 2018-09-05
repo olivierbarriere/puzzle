@@ -1,16 +1,15 @@
-devtools::install_github("syneoshealth/puzzle",force=T)
+devtools::install_github("syneoshealth/puzzle")
 library(puzzle)
-getwd()
-df_pk = puzzle::df_pk
-df_dose = puzzle::df_dose
-df_cov = puzzle::df_cov
-df_extra_times = puzzle::df_extra_times
-readr::write_csv(df_pk,"pk.csv")
-readr::write_csv(df_dose,"dose.csv")
-readr::write_csv(df_cov,"cov.csv")
-readr::write_csv(df_extra_times,"extra_times.csv")
+pk = puzzle::df_pk
+dose = puzzle::df_dose
+cov = puzzle::df_cov
+extra_times = puzzle::df_extra_times
+readr::write_csv(pk,"pk.csv")
+readr::write_csv(dose,"dose.csv")
+readr::write_csv(cov,"cov.csv")
+readr::write_csv(extra_times,"extra_times.csv")
 
-
+#Example using .csv
 puzzle(directory=file.path(getwd()),
        order=c(0,1),
        parallel = T,
@@ -19,63 +18,47 @@ puzzle(directory=file.path(getwd()),
        optionalcolumns="TIMEPOINT")
 
 
-puzzle(directory=file.path(getwd()),
-       order=1,
-       pk=list(data="df_pk"), dose=list(data="df_dose"), cov=list(data="df_cov"), extratimes=list(data="df_extra_times"),
-       nm=list(data="nonmem.csv"),
-       optionalcolumns="TIMEPOINT")
-
-
-puzzle(directory=file.path(getwd()),
-       order=1,
-       pk=list(data="df_pk"), dose=list(data="df_dose"), cov=list(data="df_cov"), extratimes=list(data="df_extra_times"),
-       nm=list(data="nonmem.csv"),
-       optionalcolumns="TIMEPOINT")
-
+#Example using an R object
+nm = list()
+pk = as.data.frame(puzzle::df_pk)
+nm$pk=list(parent=pk)
 head(puzzle(directory=file.path(getwd()),
        order=c(0,1),
        parallel = T,
        pk=list(data=nm$pk), dose=list(data=df_dose), cov=list(data=df_cov),
-       #nm=list(name="nonmem.csv"),
        optionalcolumns="TIMEPOINT"))
-
-
-
 
 #Example of multiple analytes
 nm = list()
 pk1 = as.data.frame(puzzle::df_pk)
 pk2 = as.data.frame(puzzle::df_pk)
-
 nm$pk=list(parent=pk1,metabolite=pk2)
-
 head(puzzle(directory=file.path(getwd()),
             order=c(0,1),
             parallel = T,
-            pk=list(data=nm$pk), dose=list(data=df_dose), cov=list(data=df_cov),
+            pk=list(data=nm$pk), dose=list(data=dose), cov=list(data=cov),
             optionalcolumns="TIMEPOINT"))
 
 
-#Example of extratimes
-nm = list()
-pk1 = as.data.frame(puzzle::df_pk)
-pk2 = as.data.frame(puzzle::df_pk)
-extratimes = as.data.frame(puzzle::df_extra_times)
+#Example of error with parallel = F
+head(puzzle(directory=file.path(getwd()),
+       order=c(1,1),
+       parallel = F,
+       pk=list(data=nm$pk), dose=list(data=dose), cov=list(data=cov), 
+       optionalcolumns="TIMEPOINT"))
+#Error in puzzle(directory = file.path(getwd()), order = c(1, 1), parallel = F,  : 
+#Would you like to use a sequential zero + first order absorption model? If yes, please set order=c(0,1). Otherwise, please set parallel = T
 
-nm$pk=list(parent=pk1,metabolite=pk2)
-nm$extratimes=list(extratimes=extratimes)
-
-
-puzzle(directory=file.path(getwd()),
+#If yes
+head(puzzle(directory=file.path(getwd()),
             order=c(0,1),
             parallel = F,
-            pk=list(data=nm$pk), dose=list(data=df_dose), cov=list(data=df_cov), extratimes = list(name="extratimes.csv"),
-            optionalcolumns="TIMEPOINT")
+            pk=list(data=nm$pk), dose=list(data=dose), cov=list(data=cov), 
+            optionalcolumns="TIMEPOINT"))
 
-
-
+#If no
 head(puzzle(directory=file.path(getwd()),
-       order=c(0,1),
-       parallel = F,
-       pk=list(data=nm$pk), dose=list(data=df_dose), cov=list(data=df_cov), 
-       optionalcolumns="TIMEPOINT"))
+            order=c(1,1),
+            parallel = T,
+            pk=list(data=nm$pk), dose=list(data=dose), cov=list(data=cov), 
+            optionalcolumns="TIMEPOINT"))
