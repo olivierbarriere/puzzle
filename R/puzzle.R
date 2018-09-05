@@ -562,11 +562,15 @@ puzzle = function(directory=NULL,
   ## Output
   nm$data=nm$data[,c(C,"ID","TIME",TIME0,TIME1,"TAD","DOSETIME","PDOSETIME",EXTRATIME,NUMDOSE,"AMT",RATE,ADDL,II,SS,TYPE,"CMT","EVID","DV","LDV","MDV",DV0,LDV0,MDV0,DV1,LDV1,MDV1,DVLLOQ,LDVLLOQ,MDVLLOQ,BLQ,LLOQ,optionalcolumns,COVS)]
   
-  if(parallel & order==c(0,1)){
+  if(parallel==F & order==c(0,1)){
     nm$data[,"RATE"] = ifelse(nm$data[,"RATE"]==-2,"F",nm$data[,"RATE"])
     nm$data[,"RATE"] = ifelse(nm$data[,"RATE"]==0,-2,nm$data[,"RATE"])
     nm$data[,"RATE"] = ifelse(nm$data[,"RATE"]=="F",0,nm$data[,"RATE"])
     nm$data = dplyr::filter(nm$data,is.na(RATE) | RATE!=0)
+  }
+  
+  if(parallel==F & order!=c(0,1)){
+    stop("Would you like to use a sequential zero + first order absorption model? If yes, please set order=c(0,1). Otherwise, please set parallel = T")
   }
   
   ## Convert to numeric
