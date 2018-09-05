@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536150335848.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2653194815",
+    "id" : "DAB3987A",
+    "lastKnownWriteTime" : 1536150357,
+    "last_content_update" : 1536150357030,
+    "path" : "E:/mgs/github/puzzle/Getting started.R",
+    "project_path" : "Getting started.R",
+    "properties" : {
+        "cursorPosition" : "1,14",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,27 @@
+Package: APD
+Type: Package
+Title: Assembling Pharmacometric Databases
+Version: 0.1.0
+Authors@R: c(
+    person(c("Olivier"), "Barrriere", role = "aut"),
+    person(c("Mario"), "Gonzalez Sales", role = c("aut", "cre"), email = "mario.gonzalezsales@syneoshealth.com")
+    )
+Maintainer: Mario GTonzalez Sales <mario.gonzalezsales@syneoshealth.com>
+Description: Creates NONMEM ready datasets from tabulated files.
+License: MIT + file LICENSE
+URL: https://github.com/syneoshealth/APD
+LazyData: TRUE
+Imports:
+    plyr,
+    reshape2,
+    sqldf,
+    lubridate,
+    dplyr
+Suggests:
+    rmarkdown,
+    knitr,
+    devtools
+VignetteBuilder: knitr
+RoxygenNote: 6.1.0
+Depends:
+    R (>= 3.0)
