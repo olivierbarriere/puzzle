@@ -1,7 +1,7 @@
 
 ## Overview
 
-The puzzle package simplifies one of the most time consuming task of the pharmacometrician workflow. This package allows you to build pharmacometrics ready databases from tabulated files following NONMEM formating convention.
+The puzzle package simplifies one of the most time consuming task of the pharmacometrician workflow. This package allows the user to assmble pharmacometrics ready databases from tabulated files following NONMEM formatting rules.
 
 ## Installation
 

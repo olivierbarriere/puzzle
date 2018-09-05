@@ -1,15 +1,15 @@
-Package: APD
+Package: puzzle
 Type: Package
-Title: Assembling Pharmacometric Databases
+Title: Assembling Pharmacometric Databases in R
 Version: 0.1.0
 Authors@R: c(
     person(c("Olivier"), "Barrriere", role = "aut"),
     person(c("Mario"), "Gonzalez Sales", role = c("aut", "cre"), email = "mario.gonzalezsales@syneoshealth.com")
     )
-Maintainer: Mario GTonzalez Sales <mario.gonzalezsales@syneoshealth.com>
-Description: Creates NONMEM ready datasets from tabulated files.
+Maintainer: Mario Gonzalez Sales <mario.gonzalezsales@syneoshealth.com>
+Description: Assembles pharmacometric ready datasets from tabulated files following NONMEM formatting rules.
 License: MIT + file LICENSE
-URL: https://github.com/syneoshealth/APD
+URL: https://github.com/syneoshealth/puzzle
 LazyData: TRUE
 Imports:
     plyr,
