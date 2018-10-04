@@ -570,7 +570,7 @@ puzzle = function(directory=NULL,
   }
   
   if(parallel==F & order!=c(0,1)){
-    stop("Would you like to use a sequential zero + first order absorption model? If yes, please set order=c(0,1). Otherwise, please set parallel = T")
+    stop("Would you like to use a sequential zero + first order absorption model? Please set order=c(0,1). Otherwise, please set parallel = T")
   }
   
   ## Convert to numeric
