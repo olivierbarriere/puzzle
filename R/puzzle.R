@@ -21,7 +21,7 @@
 #' @param parallel define parallel zero + first order absorption 
 #' @return a .csv file
 #' @export
-#' @example
+#' @examples
 #'
 #'nm = list(pk = list(parent=as.data.frame(puzzle::df_pk_start)),
 #'          dose=as.data.frame(puzzle::df_dose_start),

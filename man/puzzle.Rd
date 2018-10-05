@@ -2,7 +2,7 @@
 % Please edit documentation in R/puzzle.R
 \name{puzzle}
 \alias{puzzle}
-\title{Assembling Pharmacometric Databases}
+\title{Puzzling out Pharmacometric Datasets}
 \usage{
 puzzle(directory = NULL, order, pk = list(name = NULL, data = NULL),
   dose = list(name = NULL, data = NULL), cov = list(name = NULL, data =
@@ -50,72 +50,16 @@ puzzle(directory = NULL, order, pk = list(name = NULL, data = NULL),
 a .csv file
 }
 \description{
-Build a dataset in the specific format required for the NONMEM analysis from basic tabulated files
+Build a dataset for the NONMEM analysis from basic tabulated files
 }
 \examples{
 
-puzzle(directory=file.path(inDirectory,"Theophylline"),order=1,
-             pk=list(name="pk.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"), extratimes=list(name="addltimes.csv"),
-             nm=list(name="nm1.csv"),
-             optionalcolumns="TIMEPOINT")
-
-nm=puzzle(directory=file.path(inDirectory,"Theophylline"),order=1,
-             pk=list(name="pk.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"), extratimes=list(name="addltimes.csv"),
-             optionalcolumns="TIMEPOINT")
-write.csv(nm, file=file.path(inDirectory,"Theophylline","nm1b.csv"),row.names=F,quote=F,na=".")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/0. Poster"),order=c(1,1),
-             pk=list(name="pk.csv"), pd=list(name="pd.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"), extratimes=list(name="addltimes.csv"),
-             coercion=list(name="nm11.txt",sep=";"),
-             nm=list(name="nm11.csv"),
-             optionalcolumns="OCC")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/1. Basic"), order=0,
-             pk=list(name="pk.csv"), pd=list(name="pd.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"),
-             nm=list(name="nm_ZeroOrder.csv"))
-
-puzzle(directory=file.path(inDirectory,"inAssembling/1. Basic"), order=1,
-             pk=list(name="pk.csv"), pd=list(name="pd.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"),
-             nm=list(name="nm_FirstOrder.csv"))
-
-puzzle(directory=file.path(inDirectory,"inAssembling/1. Basic"), order=c(0,1),
-             pk=list(name="pk.csv"), pd=list(name="pd.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"),
-             nm=list(name="nm_ParallelZeroAndFirstOrder.csv"))
-
-puzzle(directory=file.path(inDirectory,"inAssembling/2. Multiple analytes and effects"), order=1,
-             pk=list(name="pk2.xlsx"), pd=list(name="pd3.xlsx"), dose=list(name="dose.csv"), cov=list(name="cov.csv"),
-             nm=list(name="nm_MultipleAnalytesandEffects.csv"))
-
-puzzle(directory=file.path(inDirectory,"inAssembling/3. Optional columns"),order=1,
-             pk=list(name="pk_OptionalColumns.csv"), dose=list(name="dose_OptionalColumns.csv"), cov=list(name="cov.csv"),
-             coercion=list(name="nm_OptionalColumns.txt"),
-             nm=list(name="nm_OptionalColumns.csv"),
-             optionalcolumns=c("OCC","TIMEPOINT","TRT"), fillcolumns="TRT")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/4. EVID4"),order=1,
-             pk=list(name="pk.xlsx"), dose=list(name="dose.csv"), cov=list(name="cov.csv"),
-             extratimes=list(name="addltimes.xlsx"),
-             nm=list(name="nm_1_full.csv"),
-             coercion=list(name="nm_1_full.txt"),
-             optionalcolumns=c("PERIOD","TIMEPOINT","TRT"), fillcolumns="TRT", arrange="ID,PERIOD,TIME,desc(MDV),CMT")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/5. extratimes mixte"),order=1,
-             pk=list(name="pk_2017-11-23.csv"), dose=list(name="doses_2017-11-23.csv"),
-             nm=list(name="nm.csv"),
-             optionalcolumns=c("TIMEPOINT"), datetimeformat="\%Y-\%m-\%d \%H:\%M")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/5. extratimes mixte"),order=1,
-             pk=list(name="pk_2017-11-23.csv"), dose=list(name="doses_2017-11-23.csv"), extratimes=list(name="extratimes_2017-11-23_TIME.csv"),
-             nm=list(name="nmt.csv"),
-             optionalcolumns=c("TIMEPOINT"), datetimeformat="\%Y-\%m-\%d \%H:\%M")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/5. extratimes mixte"),order=1,
-             pk=list(name="pk_2017-11-23.csv"), dose=list(name="doses_2017-11-23.csv"), extratimes=list(name="extratimes_2017-11-23_DATETIME.csv"),
-             nm=list(name="nmdt.csv"),
-             optionalcolumns=c("TIMEPOINT"), datetimeformat="\%Y-\%m-\%d \%H:\%M")
-
-puzzle(directory=file.path(inDirectory,"inAssembling/5. extratimes mixte"),order=1,
-             pk=list(name="pk_2017-11-23.csv"), dose=list(name="doses_2017-11-23.csv"), extratimes=list(name="extratimes_2017-11-23.csv"),
-             nm=list(name="nmtdt.csv"),
-             optionalcolumns=c("TIMEPOINT"), datetimeformat="\%Y-\%m-\%d \%H:\%M")
+nm = list(pk = list(parent=as.data.frame(puzzle::df_pk_start)),
+         dose=as.data.frame(puzzle::df_dose_start),
+         cov=as.data.frame(puzzle::df_cov_start))
+puzzle(directory=file.path(getwd()),
+      order=c(0),
+      pk=list(data=nm$pk), 
+      dose=list(data=nm$dose), 
+      cov=list(data=nm$cov))
 }
