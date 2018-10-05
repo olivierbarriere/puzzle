@@ -1,7 +1,7 @@
 
 ## Overview
 
-The puzzle package simplifies one of the most time consuming task of the pharmacometrician workflow. This package allows the user to assmble pharmacometrics ready databases from tabulated files following NONMEM formatting rules.
+This package allows the user to assemble pharmacometrics ready databases from tabulated files following NONMEM convention.
 
 ## Installation
 
@@ -34,31 +34,29 @@ install_github("syneoshealth/puzzle")
 library("puzzle")
 ```
 
-## Assembling Pharmacometric Databases
+## Using puzzle() to Assemble Pharmacometric Datasets
 
-1) Load the datasets
-
-```{r}
-pk = puzzle::df_pk
-dose = puzzle::df_dose
-```
-
-2) Save them as .csv files
+1) Load some data
 
 ```{r}
-pk = readr::write_csv(pk,"pk.csv")
-dose = readr::write_csv(dose,"dose.csv")
+nm = list(pk = list(parent=as.data.frame(puzzle::df_pk_start)),
+          dose=as.data.frame(puzzle::df_dose_start),
+          cov=as.data.frame(puzzle::df_cov_start))
 ```
-3) Call the puzzle function puzzle()
+
+2) Run puzzle()
 
 ```{r}
 puzzle(directory=file.path(getwd()),
-      order=1,
-      pk=list(name="pk.csv"), 
-      dose=list(name="dose.csv"), 
-      nm=list(name="nonmem.csv"))
+       order=1,
+       pk=list(data=nm$pk), 
+       dose=list(data=nm$dose), 
+       cov=list(data=nm$cov),
+       nm=list(name="nonmem.csv"))
+
 ```
-The puzzle function will create a NONMEM ready dataset "nonmem.csv" from the tabulated files "pk.csv" and "dose.csv" assuming the absorption is going to be modeled using a first order absorption process (order=1).
+
+The puzzle function will create a NONMEM ready dataset "nonmem.csv" from the R object nm assuming the absorption is going to be modeled using a first order absorption process (i.e. order=1).
 
 ## Recommended reading
 

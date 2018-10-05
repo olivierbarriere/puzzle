@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assembling NONMEM Datasets in R • andir</title>
+<title>Assembling Pharmacometric Databases in R • puzzle</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Assembling NONMEM Datasets in R">
-<meta property="og:description" content="Creates NONMEM ready datasets from tabulated files.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Assembling Pharmacometric Databases in R">
+<meta property="og:description" content="Assembles pharmacometric ready datasets from tabulated files following NONMEM formatting rules.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">andir</a>
+        <a class="navbar-link" href="index.html">puzzle</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
@@ -48,7 +48,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ModelingGreatSolutions/andir">
+  <a href="https://github.com/syneoshealth/puzzle">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -68,7 +68,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>The Assembling NONMEM Datasets in R “andir” package simplifies one of the most time consuming task of the pharmacometrician workflow. This package allows you to build NONMEM ready datasets from tabulated files</p>
+<p>This package allows the user to assemble pharmacometrics ready databases from tabulated files following NONMEM convention.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -78,32 +78,32 @@
 <pre class="{r}"><code>install.packages("devtools")</code></pre>
 <p>2) Load the devtools package.</p>
 <pre class="{r}"><code>library("devtools")</code></pre>
-<p>3) Install the andir package</p>
-<pre class="{r}"><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github(ModelingGreatSolutions/andir)</a></code></pre>
-<p>4) Load the andir package</p>
-<pre class="{r}"><code>library("andir")</code></pre>
+<p>3) Install the puzzle</p>
+<pre class="{r}"><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github("syneoshealth/puzzle")</a></code></pre>
+<p>4) Load the puzzle package</p>
+<pre class="{r}"><code>library("puzzle")</code></pre>
 </div>
-<div id="assembling-nonmem-datasets-in-r" class="section level2">
+<div id="using-puzzle-to-assemble-pharmacometric-datasets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#assembling-nonmem-datasets-in-r" class="anchor"></a>Assembling NONMEM Datasets in R</h2>
-<p>1) Load the datasets</p>
-<pre class="{r}"><code>df_pk = andir::df_pk
-df_dose = andir::df_dose</code></pre>
-<p>2) Save them as .csv files</p>
-<pre class="{r}"><code>df_pk = readr::write_csv(df_pk,"pk.csv")
-df_dose = readr::write_csv(df_dose,"dose.csv")</code></pre>
-<p>3) Call the Assembling NONMEM Datasets function and()</p>
-<pre class="{r}"><code>and(directory=file.path(getwd()),
-    order=1,
-    pk=list(name="pk.csv"), 
-    dose=list(name="dose.csv"), 
-    nm=list(name="nonmem.csv"))</code></pre>
-<p>The and function will create a NONMEM ready dataset “nonmem.csv” from the tabulated files “pk.csv” and “dose.csv” assuming the absorption is going to be modeled using a first order absorption process (order=1).</p>
+<a href="#using-puzzle-to-assemble-pharmacometric-datasets" class="anchor"></a>Using puzzle() to Assemble Pharmacometric Datasets</h2>
+<p>1) Load some data</p>
+<pre class="{r}"><code>nm = list(pk = list(parent=as.data.frame(puzzle::df_pk_start)),
+          dose=as.data.frame(puzzle::df_dose_start),
+          cov=as.data.frame(puzzle::df_cov_start))</code></pre>
+<p>2) Run puzzle()</p>
+<pre class="{r}"><code>puzzle(directory=file.path(getwd()),
+       order=1,
+       pk=list(data=nm$pk), 
+       dose=list(data=nm$dose), 
+       cov=list(data=nm$cov),
+       nm=list(name="nonmem.csv"))
+</code></pre>
+<p>The puzzle function will create a NONMEM ready dataset “nonmem.csv” from the R object nm assuming the absorption is going to be modeled using a first order absorption process (i.e. order=1).</p>
 </div>
 <div id="recommended-reading" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recommended-reading" class="anchor"></a>Recommended reading</h2>
-<p>The andir website contains several useful articles to make full use of the andir</p>
+<p>Extensive package documentation is available here:</p>
 </div>
 
   </div>
@@ -112,7 +112,7 @@ df_dose = readr::write_csv(df_dose,"dose.csv")</code></pre>
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/ModelingGreatSolutions/andir">https://​github.com/​ModelingGreatSolutions/​andir</a>
+<li>Browse source code at <br><a href="https://github.com/syneoshealth/puzzle">https://​github.com/​syneoshealth/​puzzle</a>
 </li>
 <li>Report a bug at <br><a href="NA">NA</a>
 </li>

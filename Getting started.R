@@ -4,17 +4,20 @@ pk = puzzle::df_pk
 dose = puzzle::df_dose
 cov = puzzle::df_cov
 extra_times = puzzle::df_extra_times
+
+setwd("C:/Users/mario/Desktop/test")
 readr::write_csv(pk,"pk.csv")
 readr::write_csv(dose,"dose.csv")
 readr::write_csv(cov,"cov.csv")
 readr::write_csv(extra_times,"extra_times.csv")
 
+
 #Example using .csv
 puzzle(directory=file.path(getwd()),
        order=c(0,1),
-       parallel = T,
+       parallel = F,
        pk=list(name="pk.csv"), dose=list(name="dose.csv"), cov=list(name="cov.csv"), extratimes=list(name="extra_times.csv"),
-       nm=list(name="nonmem.csv"),
+       nm=list(name="nonmem_01s.csv"),
        optionalcolumns="TIMEPOINT")
 
 
