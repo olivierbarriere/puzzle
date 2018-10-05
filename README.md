@@ -58,6 +58,3 @@ puzzle(directory=file.path(getwd()),
 
 The puzzle function will create a NONMEM ready dataset "nonmem.csv" from the R object nm assuming the absorption is going to be modeled using a first order absorption process (i.e. order=1).
 
-## Recommended reading
-
-Extensive package documentation is available here: https://syneoshealth.github.io/puzzle/
