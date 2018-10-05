@@ -60,4 +60,4 @@ The puzzle function will create a NONMEM ready dataset "nonmem.csv" from the R o
 
 ## Recommended reading
 
-Extensive package documentation is available here: 
+Extensive package documentation is available here: https://syneoshealth.github.io/puzzle/
